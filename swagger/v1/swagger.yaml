@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/urls":
+    post:
+      summary: Creates a short URL
+      description: This endpoint receives a long URL and returns a shortened URL. If the URL already exists, it returns the existing shortened URL.
+      security:
+        - BearerAuth: []  # Ensures this endpoint requires BearerAuth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                long_url:
+                  type: string
+                  example: "https://example.com"
+              required:
+                - long_url
+      responses:
+        '200':
+          description: URL already exists and returns the shortened URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shortened_url:
+                    type: string
+                    example: "http://localhost:3000/urls/abcd1234"
+        '201':
+          description: URL created successfully and returns the shortened URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shortened_url:
+                    type: string
+                    example: "http://localhost:3000/urls/xyz7890"
+        '422':
+          description: Invalid URL or URL is not well-formed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid URL"
+        '401':
+          description: Unauthorized, invalid token provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Unauthorized"
+servers:
+  - url: http://localhost:3000
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:  # This applies globally to all endpoints
+  - BearerAuth: []
