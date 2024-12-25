@@ -9,6 +9,9 @@ Requirements:
 - Expose an API with token for external web clients to create short URL
 - Document the exposed API in swagger
 - write spec for exposed API
+
+
+
 The application should
 - have a form for submitting long URLs.
 - generate a unique shortened URL for each long URL submitted.
