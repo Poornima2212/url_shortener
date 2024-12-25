@@ -1,0 +1,32 @@
+<h1>Shorten your URL</h1>
+
+<%= form_with model: @url, local: true, html: { class: "url-form" } do |form| %>
+  <% if @url.errors.any? %>
+    <div class="error-explanation">
+      <h2><%= pluralize(@url.errors.count, "error") %> prevented this URL from being saved:</h2>
+      <ul>
+        <% @url.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :long_url, "Enter your long URL" %>
+    <%= form.text_field :long_url, placeholder: "https://example.com", class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+  <%= form.submit "Create Short URL", class: "btn btn-primary", data: { disable_with: "Processing..." } %>
+  </div>
+<% end %>
+
+<% if local_assigns[:shortened_url] %>
+  <div class="success-message">
+    <h2>Shortened URL:</h2>
+    <p>
+      <%= link_to url_path(shortened_url), url_path(shortened_url), class: "short-url-link" %>
+    </p>
+  </div>
+<% end %>
