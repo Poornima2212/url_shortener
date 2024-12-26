@@ -20,29 +20,30 @@ The application should
 
 
 API SERVER SETUP:
+
 Download brew:
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
 
 
 on succesive install of brew well see these commands, we have to run them:
 
-echo >> /Users/poornimaanantharaman/.zprofile
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/poornimaanantharaman/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
+ `echo >> /Users/poornimaanantharaman/.zprofile `
+ `echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/poornimaanantharaman/.zprofile `
+ `eval "$(/opt/homebrew/bin/brew shellenv)" `
 
 Install Rbenv to install ruby:
 
-brew install rbenv
-rbenv instal 3.3.6
-rbenv global 3.3.6
+ `brew install rbenv `
+ `rbenv instal 3.3.6 `
+ `rbenv global 3.3.6 `
 
 Copy below to ~bash_profile/zshrc:
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+ `export PATH="$HOME/.rbenv/bin:$PATH" `
+ `eval "$(rbenv init -)" `
 
 move to url_shortener repo:
 
-sudo gem install bundler
-bundle i
+ `sudo gem install bundler `
+ `bundle i `
