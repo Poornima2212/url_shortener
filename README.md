@@ -26,7 +26,7 @@ Download brew:
  `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
 
 
-on succesive install of brew well see these commands, we have to run them:
+on succesive install of bew, we will have to run the below commands:
 
  
   `echo >> /Users/poornimaanantharaman/.zprofile  `
