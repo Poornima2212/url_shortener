@@ -21,11 +21,11 @@ RSpec.describe 'URLs API', type: :request do
       # Static bearer token for authorization (using the provided hash)
       let(:Authorization) { 'Bearer f57976c642697285620b353ac5ee1239' }
 
-      before do
+      before(:each) do
         Url.destroy_all
       end
 
-      after do
+      after(:each) do
         Url.destroy_all
       end
 
@@ -52,14 +52,7 @@ RSpec.describe 'URLs API', type: :request do
 
       # Success response (201) - When new URL is created
       response '201', 'URL created successfully' do
-        let(:url) { { long_url: 'https://www.example.com' } }
-
-        before do
-          # Ensure no existing URL exists to create a new one
-
-          # Mock the URL hash generation to return a fixed value for testing
-          allow_any_instance_of(UrlsController).to receive(:generate_url_hash).with(url[:long_url]).and_return('testhash')
-        end
+        let(:url) { { long_url: 'https://www.example1234.com' } }
 
         run_test! do |response|
           expect(response.status).to eq(201)  # Ensure status matches expectation
