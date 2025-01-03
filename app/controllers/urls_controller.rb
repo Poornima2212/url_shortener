@@ -1,12 +1,15 @@
 require 'digest'
 
 class UrlsController < ApplicationController
+  before_action :find_user_by_email, only: [:create]
+
   def new
     @url = Url.new
   end
 
   def create
-    @url = Url.new(url_params)
+    byebug
+    @url = @user.urls.new(url_params)
     # Check if the URL already exists based on its hash
     url_hash = generate_url_hash(@url.long_url)
     existing_url = Url.find_by(url_hash: url_hash)
@@ -28,7 +31,8 @@ class UrlsController < ApplicationController
   end
 
   def show
-    @url = Url.find_by(shortened_url: params[:id])
+    @url = @user.urls
+    render json: @urls
     if @url
       Rails.logger.info "Redirecting to: #{@url.long_url}"
       redirect_to @url.long_url, allow_other_host: true, turbo: false
@@ -39,8 +43,14 @@ class UrlsController < ApplicationController
 
   private
 
+  def find_user_by_email
+    @user = User.find_by(email: params[:url][:email])
+  rescue ActiveRecord::RecordNotFound
+    render json: {error: "User not found"}, status: :not_found
+  end
+
   def url_params
-    params.require(:url).permit(:long_url)
+    params.require(:url).permit(:long_url, :email)
   end
 
   def generate_shortened_url

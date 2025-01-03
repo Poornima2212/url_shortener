@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_25_151511) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_02_135924) do
   create_table "urls", force: :cascade do |t|
     t.string "long_url"
     t.string "shortened_url"
@@ -19,5 +19,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_151511) do
     t.string "url_hash"
     t.index ["shortened_url"], name: "index_urls_on_shortened_url", unique: true
     t.index ["url_hash"], name: "index_urls_on_url_hash", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 end

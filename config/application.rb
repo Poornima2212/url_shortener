@@ -15,6 +15,9 @@ module UrlShortener
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
+    config.active_record.encryption.key_derivation_salt = Rails.application.credentials.active_record_encryption[:primary_key]
+    config.active_record.encryption.primary_key = Rails.application.credentials.active_record_encryption[:deterministic_key]
+    config.active_record.encryption.deterministic_key = Rails.application.credentials.active_record_encryption[:key_derivation_salt]
 
     # Configuration for the application, engines, and railties goes here.
     #
