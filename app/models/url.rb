@@ -5,4 +5,17 @@ class Url < ApplicationRecord
     # Validate presence and uniqueness of shortened_url
     validates :shortened_url, presence: true, uniqueness: true
     validates :url_hash, presence: true, uniqueness: true
+    after_commit :set_expiry
+
+    EXPIRY = 10.seconds.to_i.freeze
+
+
+    def set_expiry
+        # Store the shortened URL in Redis with expiration (2 days)
+        $redis.set("ISLIVE::#{self.id}", true, ex: EXPIRY)
+    end
+
+    def is_live?
+        $redis.exists?("ISLIVE::#{self.id}")
+    end
 end

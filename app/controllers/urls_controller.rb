@@ -1,6 +1,16 @@
 require 'digest'
 
 class UrlsController < ApplicationController
+
+  def index
+    @urls = Url.all.order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.json { render json: @urls }
+    end
+  end
+
+
   def new
     @url = Url.new
   end
@@ -29,7 +39,7 @@ class UrlsController < ApplicationController
 
   def show
     @url = Url.find_by(shortened_url: params[:id])
-    if @url
+    if @url&.is_live?
       Rails.logger.info "Redirecting to: #{@url.long_url}"
       redirect_to @url.long_url, allow_other_host: true, turbo: false
     else

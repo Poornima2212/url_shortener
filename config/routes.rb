@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :urls, only: [:new, :create, :show]
+  resources :urls, only: [:index, :show, :new, :create]
 
   namespace :api do
     namespace :v1 do
@@ -25,6 +25,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root "urls#new"
+  root "urls#index"
   get ':id', to: 'urls#show', as: 'shortened_url' 
 end

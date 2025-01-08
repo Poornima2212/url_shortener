@@ -1,0 +1,24 @@
+<h1>Welcome to the URL Shortener</h1>
+<p>Manage and shorten your URLs with ease.</p>
+
+<%= link_to "Create a New Shortened URL", new_url_path, class: "btn btn-primary" %>
+
+<h2>Available URLs:</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Shortened URL</th>
+      <th>Long URL</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @urls.each do |url| %>
+      <tr>
+        <td><%= link_to url.shortened_url, url_path(url.shortened_url) %></td>
+        <td><%= link_to url.long_url, url.long_url, target: "_blank" %></td>
+        <td><%= url.created_at.strftime('%B %d, %Y %H:%M:%S') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
