@@ -7,7 +7,7 @@ class Url < ApplicationRecord
     validates :url_hash, presence: true, uniqueness: true
     after_commit :set_expiry
 
-    EXPIRY = 10.seconds.to_i.freeze
+    EXPIRY = 48.hours.to_i.freeze
 
 
     def set_expiry
