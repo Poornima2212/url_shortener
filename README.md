@@ -7,6 +7,7 @@ Requirements:
 - Submit the form and receive a shortened URL in return.
 - Use the shortened URL to redirect to the original long URL.
 - Expose an API with token for external web clients to create short URL
+- Add 2 days expiry for the URL 
 - Document the exposed API in swagger
 - write spec for exposed API
 
